@@ -13,8 +13,6 @@ class MyHttpRequestHandler(http.server.SimpleHTTPRequestHandler):
             # Generate 10 MB of dummy data
             dummy_data = 'A' * (1024 * 1024 * 10)
             self.wfile.write(bytes(dummy_data, 'utf8'))
-            time.sleep(0.5)
-            self.wfile.write(bytes(dummy_data, 'utf8'))
         else:
             self.send_response(404)
             self.end_headers()

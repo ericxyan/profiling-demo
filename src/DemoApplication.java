@@ -11,13 +11,15 @@ import java.util.concurrent.Executors;
 
 public class DemoApplication {
 
-  public static void main(String[] args) throws IOException {
+  public static void main(String[] args) throws IOException, InterruptedException {
     // wait for press any key to start the demo
-    System.out.println("Press any key to start the demo");
-    System.in.read();
-
+    // System.out.println("Press any key to start the demo");
+    // System.in.read();
+    System.out.println("Startup");
+    Thread.sleep(60000);
+    System.out.println("Starting ...");
     List<Thread> cpuThreads = new ArrayList<>();
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 1000; i++) {
       Thread cpuThread = new Thread(() -> cpuIntensiveTask(Duration.ofSeconds(3)), "cpu-task-" + i);
       cpuThreads.add(cpuThread);
     }
@@ -30,13 +32,15 @@ public class DemoApplication {
 
 //    Thread ioThread = new Thread(() -> ioIntensiveTask(), "ioIntensiveTask");
 //    ioThread.start();
+    
+    Thread.sleep(1000000);
     System.in.read();
   }
 
   public static void cpuIntensiveTask(Duration duration) {
 //    System.out.println("Start ...");
     try {
-      for (int i = 0; i < 5; i++) {
+      for (int i = 0; i < 100; i++) {
         long startTime = System.currentTimeMillis();
         while (System.currentTimeMillis() - startTime < duration.toMillis()) {
           double x = Math.sqrt(Math.random());

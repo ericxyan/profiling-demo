@@ -1,0 +1,21 @@
+version: 'v3.8'
+
+services:
+  jdk17:
+    image: openjdk:17-alpine
+    # stdin_open: true
+    # tty: true
+    working_dir: /workspace/src
+    command: java -Djava.rmi.server.hostname=localhost -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.rmi.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false DemoApplication
+    ports:
+      - "9010:9010"
+    volumes:
+      - ./src:/workspace/src
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
